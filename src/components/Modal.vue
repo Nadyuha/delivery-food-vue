@@ -49,7 +49,7 @@
           </div>
         </div>
 
-        <div class="cart-modal__item">
+        <!-- <div class="cart-modal__item">
           <p class="cart-modal__item-title">Ролл угорь стандарт</p>
           <div class="cart-modal__item-controls">
             <div class="cart-modal__item-controls-price">750&nbsp;₽</div>
@@ -67,9 +67,9 @@
               </button>
             </div>
           </div>
-        </div>
+        </div> -->
 
-        <div class="cart-modal__item">
+        <!-- <div class="cart-modal__item">
           <p class="cart-modal__item-title">Ролл угорь стандарт</p>
           <div class="cart-modal__item-controls">
             <div class="cart-modal__item-controls-price">250&nbsp;₽</div>
@@ -87,9 +87,9 @@
               </button>
             </div>
           </div>
-        </div>
+        </div> -->
 
-        <div class="cart-modal__item">
+        <!-- <div class="cart-modal__item">
           <p class="cart-modal__item-title">Ролл угорь стандарт</p>
           <div class="cart-modal__item-controls">
             <div class="cart-modal__item-controls-price">250&nbsp;₽</div>
@@ -107,7 +107,7 @@
               </button>
             </div>
           </div>
-        </div>
+        </div> -->
 
         <div class="cart-modal__item">
           <p class="cart-modal__item-title">Ролл угорь стандарт</p>
@@ -131,7 +131,7 @@
       </div>
 
       <div class="cart-modal__footer">
-        <div class="cart-modal__footer-price">1250&nbsp;₽</div>
+        <div class="cart-modal__footer-price">500&nbsp;₽</div>
 
         <div class="cart-modal__footer-controls">
           <button class="cart-modal__btn cart-modal__btn-sign">
@@ -183,6 +183,35 @@ const closeModal = () => emit("toggleModal");
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.cart-modal__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  border-radius: 2px;
+  padding: 8px 16px;
+  width: 100%;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: center;
+  outline: none;
+}
+
+.cart-modal__btn-sign {
+  max-width: 98px;
+  background-color: #1890ff;
+  color: #fff;
+  border: 1px solid #1890ff;
+}
+
+.cart-modal__btn-cart {
+  max-width: 116px;
+  background-color: #fff;
+  color: #595959;
+  border: 1px solid #d9d9d9;
 }
 
 .cart-modal__header-title {
