@@ -10,7 +10,7 @@
             </div>
             <div class="products-wrapper">
                 <ul class="products__list" id="goods-container">
-                    <GoodsItems v-for="good in goodsArr" :key="good.id" :good="good"/>
+                    <GoodsItems v-for="good in store.goods" :key="good.id" :good="good"/>
                 </ul>
             </div>
         </div>
@@ -19,9 +19,10 @@
 </template>
 
 <script setup>
-    import {goodsArr} from '../constants/goods'
-    import { restArr } from "../constants/rest";
-    import GoodsItems from '../components/GoodsItems.vue'
+    //import {goodsArr} from '../constants/goods'
+    //import { restArr } from "../constants/rest";
+    import GoodsItems from '../components/GoodsItems.vue';
+    import { store } from '../store/index';
 
 </script>
 
@@ -37,7 +38,7 @@ export default {
     },
     computed: {
         arrItem() {
-            const arr = restArr.find(item => item.id === Number(this.arrRest))
+            const arr = store.rests.find(item => item.id === Number(this.arrRest))
             return arr;
         }
     }
