@@ -10,7 +10,7 @@
             </div>
             <div class="products-wrapper">
                 <ul class="products__list" id="goods-container">
-                    <GoodsItems v-for="good in store.goods" :key="good.id" :good="good"/>
+                    <GoodsItems v-for="good in goodsRest" :key="good.id" :good="good" :btnActive="store.isOpen"/>
                 </ul>
             </div>
         </div>
@@ -23,25 +23,40 @@
     //import { restArr } from "../constants/rest";
     import GoodsItems from '../components/GoodsItems.vue';
     import { store } from '../store/index';
-
+    import { toRaw} from 'vue';
 </script>
 
 <script >
 export default {
     data() {
         return {
-            arrRest: null
+            arrRest: null,
         };
     },
     created() {
-        this.arrRest = this.$route.params.restId
+        this.arrRest = this.$route.params.restId;
     },
     computed: {
         arrItem() {
             const arr = store.rests.find(item => item.id === Number(this.arrRest))
             return arr;
+        },
+        goodsRest() {
+        //     let goodsItem = []
+        //     const arr = toRaw(store.goods).map(item => {
+        //         for(let i = 0; i < item.name.length; i++) {
+        //             if(item.name[i] === this.arrItem.title){
+        //                 goodsItem.push(item)
+        //             }
+        //         }
+        //     })
+        //     return goodsItem;
+        // }
+            
+            const goodsItem = toRaw(store.goods).filter(item => item.name === this.arrItem.title)
+            return goodsItem;
         }
-    }
+    },
 
 }
 </script>

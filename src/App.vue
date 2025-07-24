@@ -5,6 +5,11 @@ import Footer from '@/components/Footer.vue';
 import Modal from './components/Modal.vue';
 import { store } from './store';
 // const isOpen = ref(false)
+import { onMounted } from 'vue';
+
+onMounted(() => {
+  document.title = "Delivery food"
+});
 
 </script>
 
@@ -30,6 +35,4 @@ import { store } from './store';
 
 </template>
 
-<style scoped>
 
-</style>

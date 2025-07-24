@@ -29,115 +29,21 @@
       </div>
 
       <div class="cart-modal__body">
-        <div class="cart-modal__item">
-          <p class="cart-modal__item-title">Ролл угорь стандарт</p>
-          <div class="cart-modal__item-controls">
-            <div class="cart-modal__item-controls-price">250&nbsp;₽</div>
-            <div class="cart-modal__item-controls-btns">
-              <button
-                class="cart-modal__item-controls-btn cart-modal__item-controls-btn-minus"
-              >
-                -
-              </button>
-              <div class="cart-modal__item-controls-count">1</div>
-              <button
-                class="cart-modal__item-controls-btn cart-modal__item-controls-btn-plus"
-              >
-                +
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- <div class="cart-modal__item">
-          <p class="cart-modal__item-title">Ролл угорь стандарт</p>
-          <div class="cart-modal__item-controls">
-            <div class="cart-modal__item-controls-price">750&nbsp;₽</div>
-            <div class="cart-modal__item-controls-btns">
-              <button
-                class="cart-modal__item-controls-btn cart-modal__item-controls-btn-minus"
-              >
-                -
-              </button>
-              <div class="cart-modal__item-controls-count">1</div>
-              <button
-                class="cart-modal__item-controls-btn cart-modal__item-controls-btn-plus"
-              >
-                +
-              </button>
-            </div>
-          </div>
-        </div> -->
-
-        <!-- <div class="cart-modal__item">
-          <p class="cart-modal__item-title">Ролл угорь стандарт</p>
-          <div class="cart-modal__item-controls">
-            <div class="cart-modal__item-controls-price">250&nbsp;₽</div>
-            <div class="cart-modal__item-controls-btns">
-              <button
-                class="cart-modal__item-controls-btn cart-modal__item-controls-btn-minus"
-              >
-                -
-              </button>
-              <div class="cart-modal__item-controls-count">1</div>
-              <button
-                class="cart-modal__item-controls-btn cart-modal__item-controls-btn-plus"
-              >
-                +
-              </button>
-            </div>
-          </div>
-        </div> -->
-
-        <!-- <div class="cart-modal__item">
-          <p class="cart-modal__item-title">Ролл угорь стандарт</p>
-          <div class="cart-modal__item-controls">
-            <div class="cart-modal__item-controls-price">250&nbsp;₽</div>
-            <div class="cart-modal__item-controls-btns">
-              <button
-                class="cart-modal__item-controls-btn cart-modal__item-controls-btn-minus"
-              >
-                -
-              </button>
-              <div class="cart-modal__item-controls-count">1</div>
-              <button
-                class="cart-modal__item-controls-btn cart-modal__item-controls-btn-plus"
-              >
-                +
-              </button>
-            </div>
-          </div>
-        </div> -->
-
-        <div class="cart-modal__item">
-          <p class="cart-modal__item-title">Ролл угорь стандарт</p>
-          <div class="cart-modal__item-controls">
-            <div class="cart-modal__item-controls-price">250&nbsp;₽</div>
-            <div class="cart-modal__item-controls-btns">
-              <button
-                class="cart-modal__item-controls-btn cart-modal__item-controls-btn-minus"
-              >
-                -
-              </button>
-              <div class="cart-modal__item-controls-count">1</div>
-              <button
-                class="cart-modal__item-controls-btn cart-modal__item-controls-btn-plus"
-              >
-                +
-              </button>
-            </div>
-          </div>
-        </div>
+        <p v-show="toRaw(store.cartItem).length === 0">Корзина пуста</p>
+        <CartItems v-for="item in store.cartItem" :key="item.id" :item="item"/>
       </div>
 
       <div class="cart-modal__footer">
-        <div class="cart-modal__footer-price">500&nbsp;₽</div>
+        <div class="cart-modal__footer-price">{{store.totalPrice}}&nbsp;₽</div>
 
         <div class="cart-modal__footer-controls">
           <button class="cart-modal__btn cart-modal__btn-sign">
             Оформить&nbsp;заказ
           </button>
-          <button class="cart-modal__btn cart-modal__btn-cart">Отмена</button>
+          <button 
+          class="cart-modal__btn cart-modal__btn-cart"
+          @click="closeModal()"
+          >Отмена</button>
         </div>
       </div>
     </div>
@@ -145,10 +51,41 @@
 </template>
 
 <script setup>
-const { isOpen } = defineProps({ isOpen: Boolean });
-const emit = defineEmits(["toggleModal"]);
-const closeModal = () => emit("toggleModal");
+import CartItems from '../components/CartItems.vue';
+import {store} from '../store/index';
+import { toRaw} from 'vue';
+
+// const { isOpen } = defineProps({ isOpen: Boolean });
+
+// const emit = defineEmits(["toggleModal"]);
+// const closeModal = () => {
+//   emit("toggleModal");
+//   //window.location.reload();//
+// }
+
+// const localCart = JSON.parse(localStorage.getItem('cartItem')) || [];
+// store.cartItem = localCart;
+
 </script>
+
+<script>
+  export default {
+    props: {
+    isOpen: Boolean,
+    },
+    created() {
+      const localCart = JSON.parse(localStorage.getItem('cartItem')) || [];
+      store.cartItem = localCart;
+    },
+    methods: {
+      closeModal() {
+        this.$emit('toggleModal');
+      }
+    },
+  }
+
+</script>
+
 
 <style scoped>
 .cart-modal__overlay {
@@ -310,3 +247,6 @@ const closeModal = () => emit("toggleModal");
   color: #40a9ff;
 }
 </style>
+
+
+
