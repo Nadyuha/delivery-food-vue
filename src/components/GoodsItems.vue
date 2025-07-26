@@ -55,7 +55,7 @@ export default {
           this.$refs.myBtn.style.opacity = '1'
         }
     }
-},
+  },
   mounted() {
     const existingItem = toRaw(store.cartItem).find((item) => item.id === this.good.id);
     if(existingItem) {

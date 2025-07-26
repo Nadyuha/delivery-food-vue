@@ -7,8 +7,6 @@ export const store = reactive({
   rests: restArr,
   goods: goodsArr,
   cartItem: [],
-  delItem: [],
-  isActive: false,
   totalPrice: 0,
   toggleModal(value) {
     this.isOpen = value;

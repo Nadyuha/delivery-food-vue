@@ -26,50 +26,43 @@
 <script>
   import { store } from '@/store';
   import { toRaw } from 'vue';
-export default {
-  props: ['item'],
-  mounted() {
-    this.totalPrice();
-  },
-  methods: {
-    totalPrice() {
-      const totalPrice = toRaw(store.cartItem).reduce((acc, item) => {
-            return acc + item.price * item.count;
-        }, 0)
-        store.totalPrice = totalPrice;
+  export default {
+    props: ['item'],
+    mounted() {
+      this.totalPrice();
     },
-    countMinus() {
-      if (this.item.count !== '0' ) {
-        this.item.count--;
-        localStorage.setItem('cartItem', JSON.stringify(store.cartItem));
-        const localCart = JSON.parse(localStorage.getItem('cartItem')) || [];
-        store.cartItem = localCart;
-        this.totalPrice();
-      }
-      if (this.item.count <= '0') {
-        const localCart = JSON.parse(localStorage.getItem('cartItem')) || [];
-        const filteredCart = localCart.filter((item) => item.id !== this.item.id);
-        localStorage.setItem('cartItem', JSON.stringify(filteredCart));
-        store.cartItem = filteredCart;
-        
-          // let delData = store.delItem;//
-          // delData.push(this.item)//
-          // delData = store.delItem;//
-          // //console.log( store.delItem);
-          // localStorage.setItem('itemDel', JSON.stringify(store.delItem));//
-          
-        this.$refs.myElement.remove();
-      }      
-    },
-    countPlus() {
-      this.item.count++;
-        localStorage.setItem('cartItem', JSON.stringify(store.cartItem));
-        const localCart = JSON.parse(localStorage.getItem('cartItem')) || [];
-        store.cartItem = localCart;
-        this.totalPrice();
-    },
+    methods: {
+      totalPrice() {
+        const totalPrice = toRaw(store.cartItem).reduce((acc, item) => {
+              return acc + item.price * item.count;
+          }, 0)
+          store.totalPrice = totalPrice;
+      },
+      countMinus() {
+        if (this.item.count !== '0' ) {
+          this.item.count--;
+          localStorage.setItem('cartItem', JSON.stringify(store.cartItem));
+          const localCart = JSON.parse(localStorage.getItem('cartItem')) || [];
+          store.cartItem = localCart;
+          this.totalPrice();
+        }
+        if (this.item.count <= '0') {
+          const localCart = JSON.parse(localStorage.getItem('cartItem')) || [];
+          const filteredCart = localCart.filter((item) => item.id !== this.item.id);
+          localStorage.setItem('cartItem', JSON.stringify(filteredCart));
+          store.cartItem = filteredCart;
+          this.$refs.myElement.remove();
+        }      
+      },
+      countPlus() {
+          this.item.count++;
+          localStorage.setItem('cartItem', JSON.stringify(store.cartItem));
+          const localCart = JSON.parse(localStorage.getItem('cartItem')) || [];
+          store.cartItem = localCart;
+          this.totalPrice();
+      },
+    }
   }
-}
 </script>
 
 <style scoped>
